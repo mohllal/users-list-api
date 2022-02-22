@@ -3,6 +3,10 @@ import { User } from '.'
 
 let user
 
+afterEach(async () => {
+  await User.destroy({ where: {}, truncate: true })
+})
+
 beforeEach(async () => {
   user = await User.create({
     name: faker.name.findName(),

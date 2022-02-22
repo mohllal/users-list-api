@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { middleware as query } from 'querymen'
+import { query } from '../../helpers'
 import { index, show } from './controller'
 export User from './model'
 
@@ -12,10 +12,12 @@ const router = new Router()
  * @apiUse listParams
  * @apiSuccess {Number} count Total amount of users.
  * @apiSuccess {Object[]} rows List of users.
+ * @apiSuccess {Number} offset Page number.
+ * @apiSuccess {Number} limit Page size.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
 router.get('/',
-  query(),
+  query,
   index)
 
 /**

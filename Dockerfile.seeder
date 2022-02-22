@@ -1,0 +1,14 @@
+FROM node:14.16 AS base
+LABEL maintainer="kareem.mohllal@gmail.com"
+
+WORKDIR /app
+
+# copy the source files
+COPY ./seeders ./seeders
+
+RUN npm install sequelize pg @faker-js/faker
+
+# change the root user for more security
+USER node
+
+ENTRYPOINT [ "/bin/bash", "-c" ]

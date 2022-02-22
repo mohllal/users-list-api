@@ -1,41 +1,19 @@
 import path from 'path'
-import merge from 'lodash/merge'
+
+export const environment = process.env.NODE_ENV || 'development'
 
 /* istanbul ignore next */
-if (process.env.NODE_ENV !== 'production') {
+if (environment !== 'production' && environment !== 'compose') {
   const dotenv = require('dotenv-safe')
   dotenv.config({
-    path: path.join(__dirname, '../.env'),
+    path: path.join(__dirname, `../.env.${environment}`),
     example: path.join(__dirname, '../.env.example')
   })
 }
 
-const config = {
-  all: {
-    env: process.env.NODE_ENV || 'development',
-    root: path.join(__dirname, '..'),
-    port: process.env.PORT || 9000,
-    ip: process.env.IP || '0.0.0.0',
-    apiRoot: process.env.API_ROOT || ''
-  },
-  test: {
-    sql: {
-      uri: process.env.SQL_URI || 'sqlite::memory:'
-    }
-  },
-  development: {
-    sql: {
-      uri: process.env.SQL_URI || 'postgres://127.0.0.1:5432/users-db'
-    }
-  },
-  production: {
-    ip: process.env.IP || undefined,
-    port: process.env.PORT || 8080,
-    sql: {
-      uri: process.env.SQL_URI || 'postgres://127.0.0.1:5432/users-db'
-    }
-  }
-}
-
-module.exports = merge(config.all, config[config.all.env])
-export default module.exports
+export const root = path.join(__dirname, '..')
+export const port = process.env.PORT || 9000
+export const ip = process.env.IP || '0.0.0.0'
+export const apiRoot = process.env.API_ROOT || ''
+export const postgresUri = process.env.POSTGRES_URI || 'postgres://127.0.0.1:5432/users-db'
+export const redisUri = process.env.REDIS_URI || 'redis://127.0.0.1:6379'

@@ -1,14 +1,15 @@
 import { success, notFound } from '../../services/response/'
 import { User } from '.'
 
-export const index = ({ querymen: { query: where, select: attributes, cursor: { skip: offset, limit, sort: order } } }, res, next) =>
-  User.findAndCountAll({ where, attributes, offset, limit })
+export const index = ({ querymen: { attributes, offset, limit, order } }, res, next) =>
+  User.findAndCountAll({ attributes, offset, limit, order })
+    .then(({ rows, count }) => ({ rows, count, offset, limit }))
     .then(success(res))
     .catch(next)
 
 export const show = ({ params: { id } }, res, next) =>
-  User.findOne({ where: { id } })
+  User.findByPk(id)
     .then(notFound(res))
-    .then((product) => product.view(true))
+    .then((user) => user ? user.view(true) : null)
     .then(success(res))
     .catch(next)

@@ -8,6 +8,10 @@ const app = () => express(apiRoot, routes)
 
 let user
 
+afterEach(async () => {
+  await User.destroy({ where: {}, truncate: true })
+})
+
 beforeEach(async () => {
   user = await User.create({
     name: faker.name.findName(),
@@ -36,6 +40,6 @@ test('GET /users/:id 200', async () => {
 
 test('GET /users/:id 404', async () => {
   const { status } = await request(app())
-    .get(apiRoot + '/123456789098765432123456')
+    .get(apiRoot + '/123')
   expect(status).toBe(404)
 })

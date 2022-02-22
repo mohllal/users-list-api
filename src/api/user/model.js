@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize'
-import { sequelize } from '../../services/sequelize'
+import sequelize from '../../services/sequelize'
 
 class User extends Model {}
 
@@ -31,16 +31,7 @@ User.init({
   tableName: 'users',
   modelName: 'users',
   timestamps: true,
-  underscored: true,
-  indexes: [{
-    name: 'user_email',
-    unique: true,
-    fields: ['email']
-  }, {
-    name: 'user_username',
-    unique: true,
-    fields: ['username']
-  }]
+  underscored: true
 })
 
 User.prototype.view = function (full) {

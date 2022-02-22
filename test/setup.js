@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { sequelize } from '../src/services/sequelize'
+import sequelize from '../src/services/sequelize'
 
 EventEmitter.defaultMaxListeners = Infinity
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
@@ -28,13 +28,9 @@ global.console = {
 }
 
 beforeAll(async () => {
-  await sequelize.sync({ alter: { drop: true } })
+  await sequelize.sync()
 })
 
 afterAll(async () => {
   await sequelize.close()
-})
-
-afterEach(async () => {
-  await sequelize.sync({ force: true })
 })
