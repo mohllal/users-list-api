@@ -15,5 +15,5 @@ export const root = path.join(__dirname, '..')
 export const port = process.env.PORT || 9000
 export const ip = process.env.IP || '0.0.0.0'
 export const apiRoot = process.env.API_ROOT || ''
-export const postgresUri = process.env.POSTGRES_URI || 'postgres://127.0.0.1:5432/users-db'
-export const redisUri = process.env.REDIS_URI || 'redis://127.0.0.1:6379'
+export const databaseUri = process.env.DATABASE_URI || 'postgres://127.0.0.1:5432/users-db'
+export const cacheUri = process.env.CACHE_URI || 'redis://127.0.0.1:6379'

@@ -1,4 +1,4 @@
 import Redis from 'ioredis'
-import { redisUri } from '../../config'
+import { cacheUri } from '../../config'
 
-export default new Redis(redisUri, { lazyConnect: true })
+export default new Redis(cacheUri, { lazyConnect: true })

@@ -1,4 +1,4 @@
 import Sequelize from 'sequelize'
-import { postgresUri } from '../../config'
+import { databaseUri } from '../../config'
 
-export default new Sequelize(postgresUri, { logging: false })
+export default new Sequelize(databaseUri, { logging: false })

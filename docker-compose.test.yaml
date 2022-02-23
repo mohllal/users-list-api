@@ -24,8 +24,8 @@ services:
     environment:
       NODE_ENV: compose
       PORT: 9000
-      POSTGRES_URI: postgres://root:password@postgres:5432/users-db
-      REDIS_URI: redis://redis:6379/
+      DATABASE_URI: postgres://root:password@postgres:5432/users-db
+      CACHE_URI: redis://redis:6379/
     command: ['./scripts/wait-for-it.sh', 'postgres:5432', '--strict', '--', 'npm', 'run', 'compose:test']
     depends_on:
       - postgres
