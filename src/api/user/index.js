@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { query } from '../../helpers'
+import { query } from '../../middlewares'
 import { index, show } from './controller'
 export User from './model'
 
